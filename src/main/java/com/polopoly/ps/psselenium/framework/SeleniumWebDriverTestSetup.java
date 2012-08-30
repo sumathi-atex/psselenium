@@ -11,7 +11,7 @@ public class SeleniumWebDriverTestSetup {
 
     private WebDriver webDriver;
     private String baseURL = "http://localhost:8080";
-    private String connectionPropertiesURL = "http://localhost:8040/connection.properties";;
+    private String connectionPropertiesURL = "http://localhost:8081/connection.properties/connection.properties";;
     
     /**
      * Constructor
@@ -41,7 +41,7 @@ public class SeleniumWebDriverTestSetup {
     
     /**
      * The URL to the {@link ConnectionProperties}. As default this is set to
-     * <code>http://localhost:8040/connection.properties</code>
+     * <code>http://localhost:8081/connection.properties/connection.properties</code>
      * @param connectionPropertiesURL the URL to the connection properties. 
      */
     public void setConnectionPropertiesURL(String connectionPropertiesURL) {
