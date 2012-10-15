@@ -24,7 +24,7 @@ public class LogoutAgent {
         
         if (webDriver.findElements(By.id("mainframeset")).size() == 1) {
             webDriver.get(guiAgent.getBaseURL() + "/polopoly/logout");
-            guiAgent.waitAgent().waitForElement(By.className("loginMessage"));
+            guiAgent.agentWait().waitForElement(By.className("loginMessage"));
         }
         return this;
     }

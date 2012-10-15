@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 /**
  * This agent interacts on a CKEditor field in Polopoly Admin GUI.  
  */
-public class CKEditorAgent implements WYSIWYGEditorAgent {
+public class CKEditorAgent {
     private final GUIAgent guiAgent;
     
     public CKEditorAgent(GUIAgent guiAgent) {
@@ -109,24 +109,24 @@ public class CKEditorAgent implements WYSIWYGEditorAgent {
 
     public void waitForCKEditor(final String editorId) throws Exception {
         
-        guiAgent.waitAgent().waitForCondition("return window.CKEDITOR != null");
-        guiAgent.waitAgent().waitForCondition(getCKEditorJSString(editorId)
+        guiAgent.agentWait().waitForCondition("return window.CKEDITOR != null");
+        guiAgent.agentWait().waitForCondition(getCKEditorJSString(editorId)
                                              + "try{fck.EditorWindow.document}catch(e){} return fck != null;");
     }
     
     public void waitForCKEditor() throws Exception {
 
-        guiAgent.waitAgent().waitForCondition("return window.CKEDITOR != null");
+        guiAgent.agentWait().waitForCondition("return window.CKEDITOR != null");
         
         String secondCondition = "var fck = null; var fckInstId = null; for (var f in window.CKEDITOR.instances)"
             + "{ fck = window.CKEDITOR.instances[f]; fckInstId = f; } "
             + " try{fck.EditorWindow.document}catch(e){} return fckInstId != null";
-        guiAgent.waitAgent().waitForCondition(secondCondition);
+        guiAgent.agentWait().waitForCondition(secondCondition);
     }
 
     public void waitforDirtyStateOnCKEditor()
             throws Exception {
-        guiAgent.waitAgent().waitForCondition("var fck; for (var f in window.CKEDITOR.instances)"
+        guiAgent.agentWait().waitForCondition("var fck; for (var f in window.CKEDITOR.instances)"
                 + "{ fck = window.CKEDITOR.instances[f]; };"
                 + "return fck.checkDirty();");
     }

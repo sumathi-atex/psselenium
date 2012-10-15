@@ -29,7 +29,7 @@ public class LoginAgent {
     public LoginAgent login(String username, String password) {
         
         try {
-            guiAgent.logoutAgent().logout();
+            guiAgent.agentLogout().logout();
         } catch (Throwable e) {
             LOG.log(Level.WARNING, "Exception occur while logging out", e);
         }
@@ -44,11 +44,11 @@ public class LoginAgent {
         webDriver.switchTo().window(webDriver.getWindowHandle());
 
         // Wait for all frames
-        WaitAgent waitAgent = guiAgent.waitAgent();
+        WaitAgent waitAgent = guiAgent.agentWait();
         
         waitAgent.waitForElement(By.id("mainframeset"));
         
-        FrameAgent frameAgent = guiAgent.frameAgent();
+        FrameAgent frameAgent = guiAgent.agentFrame();
 
         frameAgent.selectNavFrame();
         waitAgent.waitForPageToLoad();

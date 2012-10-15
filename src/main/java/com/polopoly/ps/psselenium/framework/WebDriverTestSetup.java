@@ -2,22 +2,20 @@ package com.polopoly.ps.psselenium.framework;
 
 import org.openqa.selenium.WebDriver;
 
-import com.polopoly.application.ConnectionProperties;
-
 /**
- * This class represents a Selenium Web Driver Test Case Setup.  
+ * This class holds test setup for Web Driver Tests. 
  */
-public class SeleniumWebDriverTestSetup {
+public class WebDriverTestSetup {
 
     private WebDriver webDriver;
     private String baseURL = "http://localhost:8080";
-    private String connectionPropertiesURL = "http://localhost:8081/connection.properties/connection.properties";;
+    // private String connectionPropertiesURL = "http://localhost:8081/connection.properties/connection.properties";
     
     /**
      * Constructor
      * @param webDriver the Web Driver use for test process
      */
-    public SeleniumWebDriverTestSetup(WebDriver webDriver)
+    public WebDriverTestSetup(WebDriver webDriver)
     {
         this.webDriver = webDriver;
     }
@@ -44,17 +42,17 @@ public class SeleniumWebDriverTestSetup {
      * <code>http://localhost:8081/connection.properties/connection.properties</code>
      * @param connectionPropertiesURL the URL to the connection properties. 
      */
-    public void setConnectionPropertiesURL(String connectionPropertiesURL) {
+    /*public void setConnectionPropertiesURL(String connectionPropertiesURL) {
         this.connectionPropertiesURL = connectionPropertiesURL;
-    }
+    }*/
     
     /**
      * The connection properties URL
      * @return the connection properties URL
      */
-    public String getConnectionPropertiesURL() {
+    /*public String getConnectionPropertiesURL() {
         return connectionPropertiesURL;
-    }
+    }*/
     
     /**
      * Return the Selenium Web Driver used for the test process

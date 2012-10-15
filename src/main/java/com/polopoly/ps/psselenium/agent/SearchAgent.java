@@ -21,7 +21,7 @@ public class SearchAgent {
      */
     public SearchAgent search(String searchText) {
         
-        guiAgent.frameAgent().selectSearchFrame();
+        guiAgent.agentFrame().selectSearchFrame();
         
         String locator = "//div[@id='search']//input[contains(@class,'searchInput')]";
         
@@ -31,7 +31,7 @@ public class SearchAgent {
         element.clear();
         element.sendKeys(searchText, Keys.RETURN);
         
-        guiAgent.waitAgent().waitForAjaxPageToLoad();
+        guiAgent.agentWait().waitForAjaxPageToLoad();
         
         return this;
     }
@@ -42,7 +42,7 @@ public class SearchAgent {
      * @return true if exists
      */
     public boolean isPresentInSearchResult(String text) {
-        guiAgent.frameAgent().selectSearchFrame();
+        guiAgent.agentFrame().selectSearchFrame();
         String locator = "//div[contains(@class, 'searchAreaResult')]//div[contains(@class, 'searchAreaResultItem')]//*[text() ='"+text+"']";
         return guiAgent.getWebDriver().findElements(By.xpath(locator)).size() > 0;
     }
@@ -52,7 +52,7 @@ public class SearchAgent {
      * @return this agent
      */
     public int getNumberOfSearchHits() {
-        guiAgent.frameAgent().selectSearchFrame();
+        guiAgent.agentFrame().selectSearchFrame();
         WebDriver webDriver = guiAgent.getWebDriver();
         WebElement element = webDriver.findElement(
                 By.xpath("//div[@id='search']//span[@class='numberOfResults']"));
@@ -66,7 +66,7 @@ public class SearchAgent {
      * @return this agent
      */
     public SearchAgent filterSearchOn(String categoryType, String category) {
-        guiAgent.frameAgent().selectSearchFrame();
+        guiAgent.agentFrame().selectSearchFrame();
         
         showFilterPane();
        
@@ -79,7 +79,7 @@ public class SearchAgent {
         locator += "//a[contains(text(),'"+category+"')]";
 
         guiAgent.getWebDriver().findElement(By.xpath(locator)).click();
-        guiAgent.waitAgent().waitForAjaxPageToLoad();
+        guiAgent.agentWait().waitForAjaxPageToLoad();
         
         return this;
     }
@@ -100,7 +100,7 @@ public class SearchAgent {
      */
     public SearchAgent showFilterPane() {
         
-        guiAgent.frameAgent().selectSearchFrame();
+        guiAgent.agentFrame().selectSearchFrame();
         
         String locator = "//div[@id='search']//li[contains(@class,'facets_toggle')]"; 
         WebDriver webDriver = guiAgent.getWebDriver();
@@ -116,7 +116,7 @@ public class SearchAgent {
      * @return this agent
      */
     public SearchAgent hideFilterPane() {
-        guiAgent.frameAgent().selectSearchFrame();
+        guiAgent.agentFrame().selectSearchFrame();
         
         String locator = "//div[@id='search']//li[contains(@class,'facets_toggle')]/a[contains(@class, 'active')]";
         WebDriver webDriver = guiAgent.getWebDriver();

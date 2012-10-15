@@ -38,9 +38,9 @@ public class SelectTabAgent {
             webElement.click();
             
             if (hrefAttribute.contains("idleCursor()")) { // Ajax tab
-                guiAgent.waitAgent().waitForAjaxPageToLoad();
+                guiAgent.agentWait().waitForAjaxPageToLoad();
             } else {
-                guiAgent.waitAgent().waitForPageToLoad();
+                guiAgent.agentWait().waitForPageToLoad();
             }
         }
         return this;

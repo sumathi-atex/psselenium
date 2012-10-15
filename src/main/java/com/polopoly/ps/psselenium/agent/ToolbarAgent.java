@@ -3,8 +3,6 @@ package com.polopoly.ps.psselenium.agent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.polopoly.cm.ContentIdFactory;
-
 /**
  * This agent interacts with toolbars in the Polopoly Admin GUI. 
  */
@@ -25,7 +23,7 @@ public class ToolbarAgent {
     {   
         WebDriver webDriver = guiAgent.getWebDriver();
         webDriver.findElement(By.xpath("//div[@class='toolbar']//a[@*='" + actionName + "']")).click();
-        guiAgent.waitAgent().waitForPageToLoad();
+        guiAgent.agentWait().waitForPageToLoad();
         
         return this;
     }
@@ -181,7 +179,7 @@ public class ToolbarAgent {
         String selectorSuffix = "//button[contains(@title, 'Remove')]";
         
         try {
-            ContentIdFactory.createContentId(titleOrContentId);
+            Float.parseFloat(titleOrContentId);
             selectorPrefix += selectorContentId;
         } catch (Exception e) {
             selectorPrefix += selectorTitle;
@@ -202,7 +200,7 @@ public class ToolbarAgent {
         }
         
         webDriver.findElement(By.xpath(selector)).click();
-        guiAgent.waitAgent().waitForPageToLoad();
+        guiAgent.agentWait().waitForPageToLoad();
         
         return this;
         

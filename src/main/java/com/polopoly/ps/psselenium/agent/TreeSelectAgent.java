@@ -63,7 +63,7 @@ public class TreeSelectAgent {
             
             WebElement iframeElement = webDriver.findElement(By.xpath(locator));
             webDriver.switchTo().frame(iframeElement);
-            guiAgent.waitAgent().waitForElement(By.xpath("//body"));
+            guiAgent.agentWait().waitForElement(By.xpath("//body"));
         }
         
         return prevoiusFrameName;
@@ -97,12 +97,12 @@ public class TreeSelectAgent {
         if (!select) {
             xpathNodeLink = "//a/span[text()='"+node+"']";
         }
-        guiAgent.waitAgent().waitForElement(By.xpath(xpathNodeLink));
+        guiAgent.agentWait().waitForElement(By.xpath(xpathNodeLink));
         WebDriver webDriver = guiAgent.getWebDriver();
         webDriver.findElement(By.xpath(xpathNodeLink)).click();
         
         if (select) {
-            guiAgent.waitAgent().waitForElement(By.xpath("//span[@class='selected' and text()='" + node + "']"));
+            guiAgent.agentWait().waitForElement(By.xpath("//span[@class='selected' and text()='" + node + "']"));
         }
         
         if (previousFrameName != null) {
@@ -167,15 +167,15 @@ public class TreeSelectAgent {
                 if (!"".equals(segment)) {
                     if (expand)  {
                         if (webDriver.findElements(By.xpath("//img[@alt='Contract " + segment +"']")).isEmpty()) {
-                            guiAgent.waitAgent().waitForElement(By.xpath("//img[@alt='Expand " + segment +"']"));
+                            guiAgent.agentWait().waitForElement(By.xpath("//img[@alt='Expand " + segment +"']"));
                             webDriver.findElement(By.xpath("//img[@alt='Expand " + segment +"']")).click();
-                            guiAgent.waitAgent().waitForElement(By.xpath("//img[@alt='Contract " + segment +"']"));
+                            guiAgent.agentWait().waitForElement(By.xpath("//img[@alt='Contract " + segment +"']"));
                         }
                     } else {
                         if (webDriver.findElements(By.xpath("//img[@alt='Expand " + segment +"']")).isEmpty()) {
-                            guiAgent.waitAgent().waitForElement(By.xpath("//img[@alt='Contract " + segment +"']"));
+                            guiAgent.agentWait().waitForElement(By.xpath("//img[@alt='Contract " + segment +"']"));
                             webDriver.findElement(By.xpath("//img[@alt='Contract " + segment +"']")).click();
-                            guiAgent.waitAgent().waitForElement(By.xpath("//img[@alt='Expand " + segment +"']"));
+                            guiAgent.agentWait().waitForElement(By.xpath("//img[@alt='Expand " + segment +"']"));
                         }
                     }
                 }

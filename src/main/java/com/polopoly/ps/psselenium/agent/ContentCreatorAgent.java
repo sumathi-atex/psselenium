@@ -27,7 +27,7 @@ public class ContentCreatorAgent {
         
         WebElement webElement = webDriver.findElement(By.xpath(selectLocator + "/..//button[1]"));
         webElement.click();
-        guiAgent.waitAgent().waitForPageToLoad();
+        guiAgent.agentWait().waitForPageToLoad();
         
         return this;
     }
@@ -45,7 +45,7 @@ public class ContentCreatorAgent {
         
         WebElement webElement = webDriver.findElement(By.xpath(selectLocator + "/../button[1]"));
         webElement.click();
-        guiAgent.waitAgent().waitForPageToLoad();
+        guiAgent.agentWait().waitForPageToLoad();
         
         return this;
     }
@@ -65,7 +65,7 @@ public class ContentCreatorAgent {
                                                 contentTypeOptionLabel, 2);
         WebElement webElement = webDriver.findElement(By.xpath(selectLocator + "/../button[1]"));
         webElement.click();
-        guiAgent.waitAgent().waitForPageToLoad();
+        guiAgent.agentWait().waitForPageToLoad();
         
         return this;
     }

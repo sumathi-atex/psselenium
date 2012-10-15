@@ -11,11 +11,11 @@ import org.openqa.selenium.support.ui.Select;
 public class InputAgent {
 
     private final GUIAgent guiAgent;
-    private final WYSIWYGEditorAgent WYSIWYGEditor;
+    private final CKEditorAgent agentCKEditor;
 
-    public InputAgent(GUIAgent guiAgent, WYSIWYGEditorAgent WYSIWYGEditor) {
+    public InputAgent(GUIAgent guiAgent, CKEditorAgent agentCKEditor) {
         this.guiAgent = guiAgent;
-        this.WYSIWYGEditor = WYSIWYGEditor;
+        this.agentCKEditor = agentCKEditor;
     }
     
     /**
@@ -71,8 +71,8 @@ public class InputAgent {
      * @return this agent
      * @throws Exception
      */
-    public InputAgent typeInWYSIWYGEditor(String value) throws Exception {
-        WYSIWYGEditor.setText(value);
+    public InputAgent typeInCKEditor(String value) throws Exception {
+        agentCKEditor.setText(value);
         return this;
     }
     
@@ -83,17 +83,17 @@ public class InputAgent {
      * @return this agent
      * @throws Exception
      */
-    public InputAgent typeInWYSIWYGEditor(String fieldLabel, String value) throws Exception {
-        WYSIWYGEditor.setText(value);
+    public InputAgent typeInCKEditor(String fieldLabel, String value) throws Exception {
+        agentCKEditor.setText(value);
         return this;
     }
     
     /**
-     * Returns the WYSIWYG editor agent
-     * @return a WYSIWYG agent
+     * Returns the {@link CKEditorAgent} editor agent
+     * @return a {@link CKEditorAgent} agent
      */
-    public WYSIWYGEditorAgent getWYSIWYGEditorAgent() {
-        return WYSIWYGEditor;
+    public CKEditorAgent agentCKEditor() {
+        return agentCKEditor;
     }
     
     /**
