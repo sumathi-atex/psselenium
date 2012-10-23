@@ -25,6 +25,7 @@ public abstract class GUIAgentBase implements GUIAgent {
     private ContentCreatorAgent contentCreatorAgent;
     private TreeSelectAgent treeSelectAgent;
     private SearchAgent searchAgent;
+    private QuickContentCreatorAgent quickContentCreatorAgent;
 
     private final WebDriverTestSetup webDrivertTestSetup;
     
@@ -49,6 +50,7 @@ public abstract class GUIAgentBase implements GUIAgent {
         contentCreatorAgent = new ContentCreatorAgent(this);
         treeSelectAgent = new TreeSelectAgent(this);
         searchAgent = new SearchAgent(this);
+        quickContentCreatorAgent = new QuickContentCreatorAgent(this);
     }
     
     /* (non-Javadoc)
@@ -154,6 +156,14 @@ public abstract class GUIAgentBase implements GUIAgent {
      */
     public SearchAgent agentSearch() {
         return searchAgent;
+    }
+
+    
+    /* (non-Javadoc)
+     * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentQuickCreator()
+     */
+    public QuickContentCreatorAgent agentQuickContentCreator() {
+        return quickContentCreatorAgent;
     }
     
     /* (non-Javadoc)
