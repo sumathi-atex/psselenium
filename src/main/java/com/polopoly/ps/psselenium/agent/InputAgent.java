@@ -84,7 +84,7 @@ public class InputAgent {
      * @throws Exception
      */
     public InputAgent typeInCKEditor(String fieldLabel, String value) throws Exception {
-        agentCKEditor.setText(value);
+        agentCKEditor.setText(fieldLabel, value);
         return this;
     }
     
@@ -110,28 +110,54 @@ public class InputAgent {
     }
     
     /**
-     * Checks (clicks on) a checkbox/radio alternative with a specific label 
+     * Checks (clicks on) a checkbox alternative with a specific label 
      * @param fieldLabel the label of the radio alternative
      * @return this agent
      */
-    public InputAgent check(String fieldLabel) {
+    public InputAgent checkCheckbox(String fieldLabel) {
         guiAgent.getWebDriver().findElement(
                 By.xpath("//*[contains(text(),'" + fieldLabel + "')]/..//input[1]")).click();
         return this;
     }
-    
+
     /**
      * Unchecks (clicks if selected) a checkbox/radio alternative with a specific label 
      * @param fieldLabel the label of the radio alternative
      * @return this agent
      */
-    public InputAgent uncheck(String fieldLabel) {
+    public InputAgent uncheckCheckBox(String fieldLabel) {
         WebElement webElement = guiAgent.getWebDriver().findElement(By.xpath("//*[contains(text(),'" + fieldLabel + "')]/..//input[1]"));
         if (webElement.isSelected())  {
             webElement.click();    
         }
         return this;
     }
+
+    /**
+     * Checks (clicks on) a radio alternative with a specific label 
+     * @param fieldLabel the label of the radio alternative
+     * @return this agent
+     */
+    public InputAgent checkRadio(String fieldLabel) {
+        guiAgent.getWebDriver().findElement(
+                By.xpath("//*[contains(text(),'" + fieldLabel + "')]/../..//input[1]")).click();
+        return this;
+    }
+
+    
+    /**
+     * Unchecks (clicks if selected) a checkbox/radio alternative with a specific label 
+     * @param fieldLabel the label of the radio alternative
+     * @return this agent
+     */
+    public InputAgent uncheckRadio(String fieldLabel) {
+        WebElement webElement = guiAgent.getWebDriver().findElement(By.xpath("//*[contains(text(),'" + fieldLabel + "')]/../..//input[1]"));
+        if (webElement.isSelected())  {
+            webElement.click();    
+        }
+        return this;
+    }
+
     
     /**
      * Returns the value of textfield with a specific field label
