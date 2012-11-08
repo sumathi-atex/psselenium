@@ -42,6 +42,15 @@ public class QuickContentCreatorAgent {
 
         guiAgent.agentFrame().selectNavFrame();
         WebDriver webDriver = guiAgent.getWebDriver();
+        
+        List<WebElement> toggleIconElement = 
+        		webDriver.findElements(By.xpath("//div[contains(@class, 'quickCreator folded')]//div[contains(@class, 'toggleIcon')]"));
+        
+        if (!toggleIconElement.isEmpty()) {
+        	toggleIconElement.get(0).click();
+        }
+        
+        
         String selectLocator = "//div[@class='quickCreator contentCreator container']//a//span[text()='" + label + "']/../../a";
         this.guiAgent.getWebDriver().findElement(By.xpath(selectLocator));
         List<WebElement> webElements = webDriver.findElements(By.xpath(selectLocator));
