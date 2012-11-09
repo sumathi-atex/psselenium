@@ -68,7 +68,7 @@ public class ClipboardAgent {
         }
         
         webDriver.findElement(By.xpath(pasteSelector)).click();
-        guiAgent.agentWait().waitForAjaxPageToLoad();
+        guiAgent.agentWait().waitForPageToLoad();
         
         return this;
     }
