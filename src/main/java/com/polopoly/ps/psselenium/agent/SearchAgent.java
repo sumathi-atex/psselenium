@@ -2,9 +2,9 @@ package com.polopoly.ps.psselenium.agent;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.pagefactory.ByChained;
 
 public class SearchAgent {
 
@@ -23,13 +23,22 @@ public class SearchAgent {
         
         guiAgent.agentFrame().selectSearchFrame();
         
-        String locator = "//div[@id='search']//input[contains(@class,'searchInput')]";
-        
         WebDriver webDriver = guiAgent.getWebDriver();
         
-        WebElement element = webDriver.findElement(By.xpath(locator));
+        WebElement element = webDriver.findElement(new ByChained(By.id("search"), 
+        		                                                 By.className("searchInput")));
         element.clear();
-        element.sendKeys(searchText, Keys.RETURN);
+        element.sendKeys(searchText);
+        
+        // element.sendKeys(Keys.RETURN); // Doesn't work in Firefox
+        // Workaround by getting the hidden button's name to be able to execute  
+        // an javascript 
+        
+        String searchBtnName = 
+        		webDriver.findElement(new ByChained(By.id("search"), 
+        				                            By.className("searchbox"), 
+        				                            By.tagName("button"))).getAttribute("name");
+        ((JavascriptExecutor) webDriver).executeScript("document.mainform." + searchBtnName + ".click()");
         
         guiAgent.agentWait().waitForAjaxPageToLoad();
         
