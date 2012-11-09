@@ -1,6 +1,9 @@
 package com.polopoly.ps.psselenium.agent;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * This agent selects a HTML frame to set the current Selenium frame context.  
@@ -22,8 +25,26 @@ public class FrameAgent {
         
         WebDriver webDriver = guiAgent.getWebDriver();
         webDriver.switchTo().window(webDriver.getWindowHandle());
-        webDriver.switchTo().frame(frame);    
+        webDriver.switchTo().frame(frame);   
         return this;
+    }
+
+    
+    /**
+     * Selects returns the name of the current frame
+     */
+    public String getCurrentFrame(){
+        String frame = null;
+        try{
+            WebElement el = (WebElement) ((JavascriptExecutor) guiAgent.getWebDriver()).executeScript(
+                    "return window.frameElement");
+            
+            guiAgent.getWebDriver().switchTo().defaultContent();
+            frame = el.getAttribute("name");
+            return frame;
+        } finally{
+            selectFrame(frame);
+        }
     }
     
     /**
