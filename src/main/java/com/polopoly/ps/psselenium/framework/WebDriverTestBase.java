@@ -58,13 +58,18 @@ public abstract class WebDriverTestBase<T extends GUIAgent> {
 
     
     /**
-     * This method will quit the current web driver.  
+     * This method will quit the current web driver. If {@link com.polopoly.ps.psselenium.framework.WebDriverTestSetup#isLogOutAfterTest() isLogOutAfterTest() in the web driver} is'true' the user will be logged out after every test (even if the test fails)
      */
     @After
     public void afterTest() throws Exception {
         try {
     } finally {
         if (webDriverTestSetup.getWebDriver() != null) {
+            
+            if(webDriverTestSetup.isLogOutAfterTest()){
+                webDriverTestSetup.getWebDriver().get(getBaseURL() + "/polopoly/logout");
+            }
+            
             webDriverTestSetup.getWebDriver().quit();
             webDriverTestSetup = null;
         }

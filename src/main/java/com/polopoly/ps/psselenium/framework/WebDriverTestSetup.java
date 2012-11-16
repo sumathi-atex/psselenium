@@ -10,7 +10,8 @@ public class WebDriverTestSetup {
     private WebDriver webDriver;
     private String baseURL = "http://localhost:8080";
     // private String connectionPropertiesURL = "http://localhost:8081/connection.properties/connection.properties";
-    
+    private boolean logOutAfterTest = true;
+
     /**
      * Constructor
      * @param webDriver the Web Driver use for test process
@@ -61,4 +62,17 @@ public class WebDriverTestSetup {
     public WebDriver getWebDriver() {
         return webDriver;
     }
+    
+    /**
+     * Return true/false to signal if the web driver test base should log out the current user from the gui after a test completes
+     * @return
+     */
+    public boolean isLogOutAfterTest() {
+        return logOutAfterTest;
+    }
+
+    public void setLogOutAfterTest(boolean logOutAfterTest) {
+        this.logOutAfterTest = logOutAfterTest;
+    }
+
 }
