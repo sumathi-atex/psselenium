@@ -52,13 +52,33 @@ public class SearchAgent {
      */
     public boolean isPresentInSearchResult(String text) {
         guiAgent.agentFrame().selectSearchFrame();
-        String locator = "//div[contains(@class, 'searchAreaResult')]//div[contains(@class, 'searchAreaResultItem')]//*[text() ='"+text+"']";
+        String locator = getSearchItemLocator(text);
         return guiAgent.getWebDriver().findElements(By.xpath(locator)).size() > 0;
+    }
+
+    private String getSearchItemLocator(String text) {
+        return "//div[contains(@class, 'searchAreaResult')]//div[contains(@class, 'searchAreaResultItem')]//*[contains(text(), '"+text+"')]";
     }
     
     /**
-     * Gets the number of the search hits
+     * Clicks the "copy" button of the first search hit given a search term
      * @return this agent
+     */
+    public SearchAgent copySearchItem(String text){
+        guiAgent.agentFrame().selectSearchFrame();
+        String itemLocator = getSearchItemLocator(text);
+        itemLocator += "/../../a[@class='copy_button']";
+        WebElement copyButton = guiAgent.getWebDriver().findElement(By.xpath(itemLocator));
+
+        ((JavascriptExecutor)guiAgent.getWebDriver()).executeScript("$(arguments[0]).show();", copyButton);
+        copyButton.click();
+        return this;
+    }
+
+    
+    /**
+     * Gets the number of the search hits
+     * @return number of search hits
      */
     public int getNumberOfSearchHits() {
         guiAgent.agentFrame().selectSearchFrame();
@@ -67,6 +87,8 @@ public class SearchAgent {
                 By.xpath("//div[@id='search']//span[@class='numberOfResults']"));
         return Integer.valueOf((String)((JavascriptExecutor)webDriver).executeScript("return arguments[0].innerHTML",element));
     }
+    
+    
     
     /**
      * Filter the search result by facet navigation for a specific category 
