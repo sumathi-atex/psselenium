@@ -1,10 +1,16 @@
 package com.polopoly.ps.psselenium.framework;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
+
 
 import com.polopoly.ps.psselenium.agent.GUIAgent;
 
@@ -14,6 +20,7 @@ import com.polopoly.ps.psselenium.agent.GUIAgent;
  */
 public abstract class WebDriverTestBase<T extends GUIAgent> {
     
+	private static Logger LOG = Logger.getLogger(WebDriverTestBase.class.getName());
     private T guiAgent;
     protected WebDriverTestSetup webDriverTestSetup;
     
@@ -98,8 +105,13 @@ public abstract class WebDriverTestBase<T extends GUIAgent> {
      * @return a default test setup
      */
     private WebDriverTestSetup createDeafultTestSetup() {
-        FirefoxProfile firefoxProfile = new FirefoxProfile();
-        WebDriver webDriver = new FirefoxDriver(firefoxProfile);
-        return new WebDriverTestSetup(webDriver);
+    	FirefoxProfile firefoxProfile = new FirefoxProfile();
+    	try {
+    		JavaScriptError.addExtension(firefoxProfile);
+    	} catch (IOException e) {
+    		LOG.log(Level.WARNING, "Could not add JS error extension to Firefox profile.");
+    	}
+    	WebDriver webDriver = new FirefoxDriver(firefoxProfile);
+    	return new WebDriverTestSetup(webDriver);
     }
 }

@@ -1,7 +1,10 @@
 package com.polopoly.ps.psselenium.agent;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import net.jsourcerer.webdriver.jserrorcollector.JavaScriptError;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -43,6 +46,14 @@ public class WaitAgent {
                     + windowName + "Old";
 
             webDriver.switchTo().window(webDriver.getWindowHandle());
+            
+            List<JavaScriptError> jsErrors = JavaScriptError.readErrors(webDriver);
+            if (jsErrors.size() != 0) {
+            	LOG.log(Level.WARNING, "JS errors found that could block the wait for page to load.");
+            	for (JavaScriptError javaScriptError : jsErrors) {
+            		LOG.log(Level.WARNING, "JS error: " + javaScriptError.getErrorMessage());
+				}     	
+            }
 
             Long seleniumPolopoly = safeGetEval(webDriver, "return window."
                     + pageLoadVariableName);
