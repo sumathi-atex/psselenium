@@ -24,5 +24,6 @@ public interface GUIAgent {
   public TreeSelectAgent agentTreeSelect();
   public SearchAgent agentSearch();
   public QuickContentCreatorAgent agentQuickContentCreator();
+  public CodeMirrorAgent agentCodeMirror();
 
 }

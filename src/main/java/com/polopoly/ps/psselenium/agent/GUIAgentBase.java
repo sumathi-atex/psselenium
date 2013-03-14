@@ -7,10 +7,10 @@ import com.polopoly.ps.psselenium.framework.WebDriverTestSetup;
 
 /**
  * This agent acts as a holder for agents that interacts with the Polopoly Admin GUI.
- * Every test of {@link WebDriverTestBase} has a reference to a {@link GUIAgentBase}.  
+ * Every test of {@link WebDriverTestBase} has a reference to a {@link GUIAgentBase}.
  */
 public abstract class GUIAgentBase implements GUIAgent {
-    
+
     private LoginAgent loginAgent;
     private LogoutAgent logoutAgent;
     private WaitAgent waitAgent;
@@ -26,16 +26,17 @@ public abstract class GUIAgentBase implements GUIAgent {
     private TreeSelectAgent treeSelectAgent;
     private SearchAgent searchAgent;
     private QuickContentCreatorAgent quickContentCreatorAgent;
+    private CodeMirrorAgent codeMirrorAgent;
 
     private final WebDriverTestSetup webDrivertTestSetup;
-    
+
     public GUIAgentBase(WebDriverTestSetup webDriverTestSetup) {
         this.webDrivertTestSetup = webDriverTestSetup;
         createAgents();
     }
 
     protected void createAgents() {
-        
+
         loginAgent = new LoginAgent(this);
         logoutAgent = new LogoutAgent(this);
         waitAgent = new WaitAgent(this, 60L);
@@ -51,15 +52,16 @@ public abstract class GUIAgentBase implements GUIAgent {
         treeSelectAgent = new TreeSelectAgent(this);
         searchAgent = new SearchAgent(this);
         quickContentCreatorAgent = new QuickContentCreatorAgent(this);
+        codeMirrorAgent = new CodeMirrorAgent(this);
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#getWebDriver()
      */
     public WebDriver getWebDriver() {
         return webDrivertTestSetup.getWebDriver();
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#getBaseURL()
      */
@@ -87,14 +89,14 @@ public abstract class GUIAgentBase implements GUIAgent {
     public WaitAgent agentWait() {
         return waitAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentActionEvent()
      */
     public ActionEventAgent agentActionEvent() {
         return actionEventAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentFrame()
      */
@@ -122,35 +124,35 @@ public abstract class GUIAgentBase implements GUIAgent {
     public ToolbarAgent agentToolbar() {
         return toolbarAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentClipboard()
      */
     public ClipboardAgent agentClipboard() {
         return clipboardAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentSelectTab()
      */
     public SelectTabAgent agentSelectTab() {
         return selectTabAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentContentCreator()
      */
     public ContentCreatorAgent agentContentCreator() {
         return contentCreatorAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentTreeSelect()
      */
     public TreeSelectAgent agentTreeSelect() {
         return treeSelectAgent;
     }
-    
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentSearch()
      */
@@ -158,14 +160,20 @@ public abstract class GUIAgentBase implements GUIAgent {
         return searchAgent;
     }
 
-    
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentQuickCreator()
      */
     public QuickContentCreatorAgent agentQuickContentCreator() {
         return quickContentCreatorAgent;
     }
-    
+
+    /* (non-Javadoc)
+     * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentCodeMirror()
+     */
+    public CodeMirrorAgent agentCodeMirror() {
+        return codeMirrorAgent;
+    }
+
     /* (non-Javadoc)
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#getWebDriverTestSetup()
      */
