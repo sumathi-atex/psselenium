@@ -2,14 +2,18 @@ package com.polopoly.ps.psselenium.agent;
 
 import org.openqa.selenium.WebDriver;
 
+import com.google.inject.Inject;
 import com.polopoly.ps.psselenium.framework.WebDriverTestBase;
 import com.polopoly.ps.psselenium.framework.WebDriverTestSetup;
+
+import de.devsurf.injection.guice.annotations.Bind;
 
 /**
  * This agent acts as a holder for agents that interacts with the Polopoly Admin GUI.
  * Every test of {@link WebDriverTestBase} has a reference to a {@link GUIAgentBase}.
  */
-public abstract class GUIAgentBase implements GUIAgent {
+@Bind
+public class GUIAgentBase implements GUIAgent {
 
     private LoginAgent loginAgent;
     private LogoutAgent logoutAgent;
@@ -29,7 +33,8 @@ public abstract class GUIAgentBase implements GUIAgent {
     private CodeMirrorAgent codeMirrorAgent;
 
     private final WebDriverTestSetup webDrivertTestSetup;
-
+    
+    @Inject
     public GUIAgentBase(WebDriverTestSetup webDriverTestSetup) {
         this.webDrivertTestSetup = webDriverTestSetup;
         createAgents();

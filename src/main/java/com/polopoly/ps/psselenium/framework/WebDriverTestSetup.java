@@ -2,6 +2,8 @@ package com.polopoly.ps.psselenium.framework;
 
 import org.openqa.selenium.WebDriver;
 
+import com.google.inject.Inject;
+
 /**
  * This class holds test setup for Web Driver Tests. 
  */
@@ -16,6 +18,7 @@ public class WebDriverTestSetup {
      * Constructor
      * @param webDriver the Web Driver use for test process
      */
+    @Inject
     public WebDriverTestSetup(WebDriver webDriver)
     {
         this.webDriver = webDriver;
